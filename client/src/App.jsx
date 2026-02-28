@@ -45,6 +45,9 @@ function App() {
         <div className='weather-container'>
           <h1>{weather.city}</h1>
           <p>Temperature: {weather.temperature} °C</p>
+          <p>Humidity: {weather.humidity}%</p>
+          <p>{weather.description}</p>
+          <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt="Weather icon" />
         </div>
       )}
     </>

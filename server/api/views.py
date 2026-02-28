@@ -23,11 +23,16 @@ def getWeather(request):
                     weather = {
                         'city': f"{data['name']}, {data['sys']['country']}",
                         'temperature': data['main']['temp'],
+                        'humidity': data['main']['humidity'],
+                        'description': data['weather'][0]['description'].title(),
+                        'icon': data['weather'][0]['icon'],
                     }
 
                     WeatherInfo.objects.create(
                         cityName = data['name'],
-                        temperature = data['main']['temp']
+                        temperature = data['main']['temp'],
+                        humidity = data['main']['humidity'],
+                        description = data['weather'][0]['description'].title()
                     )
                 else:
                     error = data.get("message", 'Could not fetch weather data')
