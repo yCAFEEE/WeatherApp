@@ -1,0 +1,30 @@
+#search-form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+}
+
+#search-form button{
+    width: 60%;
+    padding: 10px;
+}
+
+form #city-name{
+    padding: 10px;
+}
+
+.weather-container{
+    width: 30vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.temp-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
