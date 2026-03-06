@@ -51,6 +51,12 @@ export default function Home(){
           </div>
           <p>{weather.description}</p>
           <p>Humidity: {weather.humidity}%</p>
+          <p>Feel: {weather.feelsLike}</p>
+          <p>Min. temperature: {weather.tempMin} °C</p>
+          <p>Max temperature: {weather.tempMax} °C</p>
+          <p>Pressure: {weather.pressure}</p>
+          <p>Visibility: {weather.visibility / 1000}km</p>
+          <p>Wind speed: {weather.windSpeed * 3.6}km/h</p>
         </div>
       )}
     </>

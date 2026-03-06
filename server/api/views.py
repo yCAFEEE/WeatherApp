@@ -24,14 +24,27 @@ def getWeather(request):
                         'city': f"{data['name']}, {data['sys']['country']}",
                         'temperature': data['main']['temp'],
                         'humidity': data['main']['humidity'],
+                        'feelsLike': data['main']['feels_like'],
+                        'tempMin': data['main']['temp_min'],
+                        'tempMax': data['main']['temp_max'],
+                        'pressure': data['main']['pressure'],
+                        'visibility': data['visibility'],
+                        'windSpeed': data['wind']['speed'],
                         'description': data['weather'][0]['description'].title(),
                         'icon': data['weather'][0]['icon'],
+                        # add: feels_like, temp_min, temp_max, pressure, visibility, wind speed
                     }
 
                     WeatherInfo.objects.create(
                         cityName = data['name'],
                         temperature = data['main']['temp'],
                         humidity = data['main']['humidity'],
+                        feelsLike = data['main']['feels_like'],
+                        tempMin = data['main']['temp_min'],
+                        tempMax = data['main']['temp_max'],
+                        pressure = data['main']['pressure'],
+                        visibility = data['visibility'],
+                        windSpeed = data['wind']['speed'],
                         description = data['weather'][0]['description'].title()
                     )
                 else:
