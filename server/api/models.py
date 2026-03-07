@@ -10,6 +10,8 @@ class WeatherInfo(models.Model):
     pressure = models.IntegerField(null = True, blank = True)
     visibility = models.IntegerField(null = True, blank = True)
     windSpeed = models.IntegerField(null = True, blank = True)
+    dt = models.IntegerField(null = True, blank = True)
+    timezone = models.IntegerField(null = True, blank = True)
     description = models.CharField(max_length = 300, null = True, blank = True)
 
     def __str__(self):

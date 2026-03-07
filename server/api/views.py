@@ -33,6 +33,8 @@ def getWeather(request):
                         'pressure': data['main']['pressure'],
                         'visibility': data['visibility'],
                         'windSpeed': data['wind']['speed'],
+                        'dt': data['dt'],
+                        'timezone': data['timezone'],
                         'description': data['weather'][0]['description'].title(),
                         'icon': data['weather'][0]['icon'],
                     }
@@ -47,6 +49,8 @@ def getWeather(request):
                         pressure = data['main']['pressure'],
                         visibility = data['visibility'],
                         windSpeed = data['wind']['speed'],
+                        dt = data['dt'],
+                        timezone = data['timezone'],
                         description = data['weather'][0]['description'].title()
                     )
                     return JsonResponse({'weather': weather})

@@ -34,6 +34,13 @@ export default function Home(){
     }
   };
   
+  let localTime;
+  if(weather){
+    localTime = new Date((weather.dt + weather.timezone) * 1000);
+    var localHours = String(localTime.getUTCHours()).padStart(2, '0');
+    var localMinutes = String(localTime.getUTCMinutes()).padStart(2, '0');
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit} id='search-form'>
@@ -54,6 +61,7 @@ export default function Home(){
             <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt="Weather icon" />
             <h1>{weather.temperature} °C</h1>
           </div>
+          <h2>Local time: {localHours + ":" + localMinutes}</h2>
           <p>{weather.description}</p>
           <p>Humidity: {weather.humidity}%</p>
           <p>Feel: {weather.feelsLike}</p>
