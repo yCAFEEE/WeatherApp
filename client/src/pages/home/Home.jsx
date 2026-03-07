@@ -4,6 +4,7 @@ import './Home.css'
 export default function Home(){
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -21,11 +22,15 @@ export default function Home(){
 
       if(response.ok){
         setWeather(data.weather);
+        setError(null);
       }else{
         setWeather(null);
+        setError(data.error);
       }
     } catch(err){
-      console.log("ESSE AQUI É O ERRO (SE TIVER): ", err);
+      console.log("Error: ", err);
+      setError("Server connection failed");
+      setWeather(null)
     }
   };
   
@@ -56,8 +61,12 @@ export default function Home(){
           <p>Max temperature: {weather.tempMax} °C</p>
           <p>Pressure: {weather.pressure}</p>
           <p>Visibility: {weather.visibility / 1000}km</p>
-          <p>Wind speed: {weather.windSpeed * 3.6}km/h</p>
+          <p>Wind speed: {(weather.windSpeed * 3.6).toFixed(2)}km/h</p>
         </div>
+      )}
+
+      {error && (
+        <p>{error}</p>
       )}
     </>
   )

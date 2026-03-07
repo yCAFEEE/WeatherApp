@@ -1,9 +1,12 @@
 import requests
+import os
+from dotenv import load_dotenv
 from django.http import JsonResponse
 from .models import WeatherInfo
 from django.views.decorators.csrf import csrf_exempt
 
-API = "94df3ed88579a382f629117fdb563072"
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
 
 @csrf_exempt
 def getWeather(request):
@@ -14,7 +17,7 @@ def getWeather(request):
         city = request.POST.get("city", '').strip()
 
         if city:
-            url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API}&units=metric"
+            url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
             try:
                 resp = requests.get(url, timeout = 5)
                 data = resp.json()
@@ -32,7 +35,6 @@ def getWeather(request):
                         'windSpeed': data['wind']['speed'],
                         'description': data['weather'][0]['description'].title(),
                         'icon': data['weather'][0]['icon'],
-                        # add: feels_like, temp_min, temp_max, pressure, visibility, wind speed
                     }
 
                     WeatherInfo.objects.create(
@@ -47,14 +49,10 @@ def getWeather(request):
                         windSpeed = data['wind']['speed'],
                         description = data['weather'][0]['description'].title()
                     )
+                    return JsonResponse({'weather': weather})
                 else:
-                    error = data.get("message", 'Could not fetch weather data')
+                    return JsonResponse({'error': data.get("message", 'Could not fetch weather data')}, status = 404)
             except requests.RequestException:
-                error = "Network error."
+                return JsonResponse({'error': "Network error."}, status = 500)
         else:
-            error = "City name is empty."
-
-    return JsonResponse({
-        'weather': weather,
-        'error': error
-    })
+            return JsonResponse({'error': "City name is empty."}, status = 400)
