@@ -68,7 +68,7 @@ export default function Home(){
           <p>Min. temperature: {weather.tempMin} °C</p>
           <p>Max temperature: {weather.tempMax} °C</p>
           <p>Pressure: {weather.pressure}</p>
-          <p>Visibility: {weather.visibility / 1000}km</p>
+          {weather.visibility && <p>Visibility: {weather.visibility / 1000}km</p>}
           <p>Wind speed: {(weather.windSpeed * 3.6).toFixed(2)}km/h</p>
         </div>
       )}
